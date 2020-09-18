@@ -2,4 +2,88 @@ body {
   background: #24e1e3;
   background: linear-gradient(135deg, #24e1e3 0%, #b588f7 100%);
 }
+
+.container {
+  width: 450px;
+  background-image: url("../img/bg.png");
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 110px 75px 75px 75px;
+  border-radius: 5px;
+}
+
+.container h1 {
+  font-size: 35px;
+  color: #77EEEE;
+  font-family: sans-serif;
+}
+
+.container form {
+  padding-top: 20px;
+}
+
+.container form label {
+  font-size: 15px;
+  color: #777;
+}
+
+.container form .news__users__link {
+  font-size: 18px;
+  color: #77EEEE;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.container form .password__reset {
+  cursor: pointer;
+}
+
+.container form .password__reset:hover {
+  color: #333;
+  -webkit-transition: ease 0.8s all;
+  transition: ease 0.8s all;
+}
+
+.ant-input-affix-wrapper {
+  border-top: none !important;
+  border-right: none !important;
+  border-left: none !important;
+  margin-top: 20px;
+}
+
+.ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.login__btn {
+  width: 300px;
+  margin-top: 20px;
+  height: 40px;
+  border: none;
+  background: #24e1e3;
+  background: linear-gradient(135deg, #8F4EF3 0%, #2397ED 100%);
+  border-radius: 4px;
+  font-size: 18px;
+  color: #fff;
+  font-family: sans-serif;
+  outline: none;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.login__btn:hover {
+  background: linear-gradient(135deg, #a773f7 0%, #59b3f8 100%);
+  -webkit-transition: ease .8s;
+  transition: ease .8s;
+}
+
+.login__pass {
+  margin-bottom: 15px;
+}
 /*# sourceMappingURL=style.css.map */
