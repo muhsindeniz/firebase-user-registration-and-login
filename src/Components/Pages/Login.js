@@ -3,7 +3,9 @@ import 'antd/dist/antd.css';
 import { Input, Form } from 'antd';
 import { MailOutlined, KeyOutlined, RightOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 import firebase from '../../Firebase/firebase';
+import { auth, firestore } from 'firebase';
 
 let Login = () => {
 
@@ -11,12 +13,13 @@ let Login = () => {
 
     function control() {
         const use = firebase.auth().signInWithEmailAndPassword(user.username, user.password)
-        .then(res => {
-            console("GİRİŞ BAŞARILI")
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                swal("Hoş Geldiniz..", "", "success")
+                
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (
