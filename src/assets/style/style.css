@@ -1,8 +1,3 @@
-body {
-  background: #24e1e3;
-  background: linear-gradient(135deg, #24e1e3 0%, #b588f7 100%);
-}
-
 .container {
   width: 450px;
   background-image: url("../img/bg.png");

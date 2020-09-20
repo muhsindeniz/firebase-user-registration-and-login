@@ -38,7 +38,6 @@ let Register = () => {
                             console.log(err)
                         });
                     swal("Tebrikler", "Kaydınız başarılı bir şekilde gerçekleştirildi..", "success");
-
                 }
             }
         }
