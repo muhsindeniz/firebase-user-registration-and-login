@@ -1,4 +1,4 @@
-.container {
+.containerr {
   width: 450px;
   background-image: url("../img/bg.png");
   position: absolute;
@@ -12,33 +12,33 @@
   border-radius: 5px;
 }
 
-.container h1 {
+.containerr h1 {
   font-size: 35px;
   color: #77EEEE;
   font-family: sans-serif;
 }
 
-.container form {
+.containerr form {
   padding-top: 20px;
 }
 
-.container form label {
+.containerr form label {
   font-size: 15px;
   color: #777;
 }
 
-.container form .news__users__link {
+.containerr form .news__users__link {
   font-size: 18px;
   color: #77EEEE;
   font-weight: bold;
   cursor: pointer;
 }
 
-.container form .password__reset {
+.containerr form .password__reset {
   cursor: pointer;
 }
 
-.container form .password__reset:hover {
+.containerr form .password__reset:hover {
   color: #333;
   -webkit-transition: ease 0.8s all;
   transition: ease 0.8s all;
@@ -80,5 +80,178 @@
 
 .login__pass {
   margin-bottom: 15px;
+}
+
+.home__menu {
+  width: 246px;
+}
+
+.border__menu {
+  /*border-right: solid 1px $border__color;*/
+}
+
+.ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
+  border: none !important;
+}
+
+.home__head {
+  font-size: 21px;
+  width: 100%;
+  font-weight: bolder;
+  color: #333;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-bottom: solid 1px #E6ECF0;
+}
+
+.profile__picture {
+  width: 49px;
+  height: 49px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.profile__post textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 22px;
+  line-height: 23px;
+  color: #444;
+  border-bottom: solid 1px #E6ECF0;
+  padding-bottom: 15px;
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.post__image__upload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.post__gallery__icon {
+  width: 20px;
+  height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 50%;
+}
+
+.post__gallery__icon:hover {
+  -webkit-box-shadow: 0px 0px 0px 11px rgba(29, 161, 248, 0.2);
+  -webkit-transition: linear .1s all;
+  transition: linear .1s all;
+  cursor: pointer;
+  -moz-box-shadow: 0px 0px 0px 11px rgba(29, 161, 248, 0.2);
+  text-align: center;
+  box-shadow: 0px 0px 0px 11px rgba(29, 161, 248, 0.2);
+}
+
+.image-item__btn-wrapper button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #333;
+  color: #fff;
+  position: absolute;
+  outline: none;
+  margin-left: -145px;
+  margin-top: 18px;
+  text-align: center;
+  border: solid 1px #333;
+  font-size: 17px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.image-item {
+  width: 150px;
+  margin: 12px 0 0 8px;
+}
+
+.image-item-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  float: left;
+}
+
+.home__between {
+  width: 100%;
+  height: 10px;
+  background-color: #EAF0F4;
+}
+
+.post__button {
+  width: 95px;
+  height: 38px;
+  float: right;
+  margin-top: -45px;
+  margin-right: -16px;
+}
+
+.post__button input {
+  width: 100%;
+  height: 38px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #24e1e3 0%, #b588f7 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  outline: none;
+  border: solid 1px #24e1e3;
+}
+
+.post__button input:hover {
+  background: linear-gradient(135deg, #039fa1 0%, #6f519a 100%);
+}
+
+.post__line {
+  width: 60px;
+  border-right: solid 1px #aab8c2;
+  height: 38px;
+  float: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: -45px;
+  margin-right: 96px;
+}
+
+.post__line__border {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: solid 2px #E6ECF0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=style.css.map */

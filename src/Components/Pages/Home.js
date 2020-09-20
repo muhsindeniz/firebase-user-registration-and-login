@@ -1,18 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
-import { Input, Form } from 'antd';
-import { MailOutlined, KeyOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu, Button, Input } from 'antd';
+import { HomeOutlined, UserOutlined, LogoutOutlined, PictureTwoTone } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 import firebase from '../../Firebase/firebase';
+import ImageUploading from 'react-images-uploading';
+
+import logo from '../../assets/img/logo.svg';
+import profile from '../../assets/img/pp.png';
 
 let Home = () => {
-    
-     //Components Style
-     document.body.style.background = 'white';
-    
+
+    //Components Style
+    document.body.style.background = 'white';
+    //Link
     let history = useHistory();
 
+    const [collapsed, setcollapsed] = useState(false);
+    const [images, setImages] = useState([]);
+    const maxNumber = 2;
+
+    //POST DATA
+    const [PostMessage, setPostMessage] = useState([]);
+
+    const onChange = (imageList, addUpdateIndex) => {
+        // data for submit
+        console.log(imageList, addUpdateIndex);
+        
+        
+    };
+
+    //Logout 
     function logout() {
         firebase.auth().signOut()
             .then(resp => {
@@ -21,17 +40,113 @@ let Home = () => {
             .catch(err => {
                 console.log(err)
             })
+        //swal("Başarıyla çıkış yapıldı..", "", "success");
     }
 
     useEffect(() => {
-        
+
+        //Menu Property
+        const { SubMenu } = Menu;
+        let toggleCollapsed = () => {
+            setcollapsed(collapsed == false)
+        }
+
     }, [])
 
 
     return (
-        <div>
-            <h1>Home Page</h1>
-            <input type="button" value="çıkıs" onClick={() => logout()} />
+        <div className="container">
+            <div className="row">
+                <div className="col-md-3 pl-4">
+                    <div className=" ml-0 mt-3 mb-3">
+                        <img src={logo} width="42px" />
+                    </div>
+
+                    <div className="home__menu">
+                        <Menu
+                            defaultSelectedKeys={['1']}
+                            defaultOpenKeys={['sub1']}
+                            mode="inline"
+                            theme="light"
+                            inlineCollapsed={collapsed}
+                        >
+                            <Menu.Item key="1" icon={<HomeOutlined style={{ fontSize: 26 }} />}>
+                                Anasayfa
+                        </Menu.Item>
+                            <Menu.Item key="2" icon={<UserOutlined style={{ fontSize: 26 }} />}>
+                                Profil
+                        </Menu.Item>
+                            <Menu.Item key="3" icon={<LogoutOutlined style={{ fontSize: 26 }} />}>
+                                Çıkış
+                        </Menu.Item>
+                        </Menu>
+                    </div>
+                </div>
+
+                <div className="col-md-6 pl-0 pr-0 pt-3 border-right border-left">
+                    <div className="home__head pb-3 pl-3">Anasayfa</div>
+                    <div className="container">
+                        <div className="row pt-2">
+                            <div className="col-md-1">
+                                <img src={profile} className="profile__picture" />
+                            </div>
+                            <div className="col-sm-11 pl-3 pt-3 profile__post">
+                                <textarea id="note" onChange={(e) => setPostMessage(e.target.value)} placeholder="Neler oluyor?"></textarea>
+                                <div className="post__image__upload mt-3">
+
+                                    <ImageUploading
+                                        multiple
+                                        value={images}
+                                        onChange={onChange}
+                                        maxNumber={maxNumber}
+                                        dataURLKey="data_url"
+                                    >
+                                        {({
+                                            imageList,
+                                            onImageUpload,
+                                            onImageRemoveAll,
+                                            onImageUpdate,
+                                            onImageRemove,
+                                            isDragging,
+                                            dragProps,
+                                        }) => (
+                                                // write your building UI
+                                                <div className="container">
+                                                    <div className="row">
+                                                        <div className="col-sm-12">
+                                                            <div className="post__gallery__icon mb-3">
+                                                                <PictureTwoTone style={{ fontSize: 24 }} onClick={onImageUpload} {...dragProps} />
+                                                            </div>
+                                                            <div className="post__line">
+                                                                <div className="post__line__border">140</div>
+                                                            </div>
+                                                            <div className="post__button">
+                                                                <input type="submit" onClick={() => console.log(PostMessage)} name="post" value="Paylaş" />
+                                                            </div>
+                                                            {imageList.map((image, index) => (
+                                                                <div key={index} className="image-item-container">
+                                                                    <img className="image-item" src={image['data_url']} alt="" />
+                                                                    <div className="image-item__btn-wrapper">
+                                                                        <button onClick={() => onImageRemove(index)}>X</button>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                    </ImageUploading>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-12" className="home__between"></div>
+                </div>
+
+                <div className="col-md-3"></div>
+            </div>
         </div>
     )
 }

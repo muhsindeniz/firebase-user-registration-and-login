@@ -10,6 +10,9 @@ import { auth, firestore } from 'firebase';
 
 let Register = () => {
 
+   //Components Style
+   document.body.style.background = 'linear-gradient(135deg, rgba(36,225,227,1) 0%, rgba(181,136,247,1) 100%)';
+
     const [user, setuser] = useState({ "fullname": "", "username": "", "email": "", "password": "", "password__again": "" });
 
     function info__control() {
@@ -49,7 +52,7 @@ let Register = () => {
 
 
     return (
-        <div className="container">
+        <div className="containerr">
             <h1>Register</h1>
             <Form>
                 <Input size="large" type="text" placeholder="Full Name" prefix={<UserOutlined />} required onChange={(e) => { setuser({ ...user, fullname: e.target.value }) }} />
@@ -58,7 +61,7 @@ let Register = () => {
                 <Input size="large" type="password" placeholder="Password" prefix={<KeyOutlined />} required onChange={(e) => { setuser({ ...user, password: e.target.value }) }} />
                 <Input size="large" type="password" placeholder="Password again" prefix={<KeyOutlined />} required onChange={(e) => { setuser({ ...user, password__again: e.target.value }) }} />
                 <input type="submit" value="Register" className="login__btn" onClick={() => info__control()} />
-                <label className="news__users">Kayıtlı mısınız? <Link to='/'> <span className="news__users__link">Giriş Yap</span></Link></label>
+                <label className="news__users">Kayıtlı mısınız? <Link to='/login'> <span className="news__users__link">Giriş Yap</span></Link></label>
 
             </Form>
         </div>

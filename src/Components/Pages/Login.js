@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import 'antd/dist/antd.css';
 import { Input, Form } from 'antd';
 import { MailOutlined, KeyOutlined, RightOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 import firebase from '../../Firebase/firebase';
 import { auth, firestore } from 'firebase';
@@ -11,6 +11,8 @@ let Login = () => {
 
     //Components Style
     document.body.style.background = 'linear-gradient(135deg, rgba(36,225,227,1) 0%, rgba(181,136,247,1) 100%)';
+     //Link
+     let history = useHistory();
 
     const [user, setuser] = useState({ "username": "", "password": "" });
 
@@ -23,6 +25,7 @@ let Login = () => {
             const use = firebase.auth().signInWithEmailAndPassword(user.username, user.password)
                 .then(res => {
                     swal("Hoş Geldiniz..", "", "success")
+                    history.push("/home");
                 })
                 .catch(err => {
                     console.log(err)
@@ -31,7 +34,7 @@ let Login = () => {
     }
 
     return (
-        <div className="container">
+        <div className="containerr">
             <h1>Login</h1>
             <Form>
                 <Input size="large" placeholder="E-mail Adress" type="email" required onChange={(e) => { setuser({ ...user, username: e.target.value }) }} prefix={<MailOutlined />} />
