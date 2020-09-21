@@ -254,4 +254,20 @@
       -ms-flex-align: center;
           align-items: center;
 }
+
+.post__text__limit {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: solid 2px red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 /*# sourceMappingURL=style.css.map */

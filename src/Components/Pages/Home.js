@@ -20,6 +20,7 @@ let Home = () => {
     const [collapsed, setcollapsed] = useState(false);
     const [images, setImages] = useState([]);
     const maxNumber = 2;
+    const [textLimit, settextLimit] = useState(310)
 
     //POST DATA
     const [PostMessage, setPostMessage] = useState([]);
@@ -27,9 +28,15 @@ let Home = () => {
     const onChange = (imageList, addUpdateIndex) => {
         // data for submit
         console.log(imageList, addUpdateIndex);
-        
-        
     };
+
+
+    //LİMİT POST TEXT
+
+
+    let postText = PostMessage.length;
+    const limit = textLimit - postText;
+
 
     //Logout 
     function logout() {
@@ -50,6 +57,7 @@ let Home = () => {
         let toggleCollapsed = () => {
             setcollapsed(collapsed == false)
         }
+
 
     }, [])
 
@@ -91,7 +99,7 @@ let Home = () => {
                                 <img src={profile} className="profile__picture" />
                             </div>
                             <div className="col-sm-11 pl-3 pt-3 profile__post">
-                                <textarea id="note" onChange={(e) => setPostMessage(e.target.value)} placeholder="Neler oluyor?"></textarea>
+                                <textarea maxLength="310" id="note" onChange={(e) => setPostMessage(e.target.value)} placeholder="Neler oluyor?"></textarea>
                                 <div className="post__image__upload mt-3">
 
                                     <ImageUploading
@@ -118,10 +126,10 @@ let Home = () => {
                                                                 <PictureTwoTone style={{ fontSize: 24 }} onClick={onImageUpload} {...dragProps} />
                                                             </div>
                                                             <div className="post__line">
-                                                                <div className="post__line__border">140</div>
+                                                                <div className={limit <= 15 ? "post__text__limit" : "post__line__border"}>{limit < 1 ? "0" : limit}</div>
                                                             </div>
                                                             <div className="post__button">
-                                                                <input type="submit" onClick={() => console.log(PostMessage)} name="post" value="Paylaş" />
+                                                                <input type="submit" disabled={PostMessage.length > 0 ? `` : `true`} onClick={() => console.log(PostMessage)} className="postButton" name="post" value="Paylaş" />
                                                             </div>
                                                             {imageList.map((image, index) => (
                                                                 <div key={index} className="image-item-container">
