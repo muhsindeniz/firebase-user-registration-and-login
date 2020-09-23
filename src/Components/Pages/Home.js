@@ -6,11 +6,16 @@ import { Link, useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 import firebase from '../../Firebase/firebase';
 import ImageUploading from 'react-images-uploading';
+import moment from 'moment'
+import 'moment/locale/tr' //For Turkey
 
 import logo from '../../assets/img/logo.svg';
 import profile from '../../assets/img/pp.png';
 
 let Home = () => {
+
+    //User id
+    let userId = firebase.auth().currentUser.uid;
 
     //Components Style
     document.body.style.background = 'white';
@@ -20,23 +25,18 @@ let Home = () => {
     const [collapsed, setcollapsed] = useState(false);
     const [images, setImages] = useState([]);
     const maxNumber = 2;
-    const [textLimit, settextLimit] = useState(310)
+    const [textLimit, settextLimit] = useState(310);
 
     //POST DATA
     const [PostMessage, setPostMessage] = useState([]);
-
-    const onChange = (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
+    const onChange = (imageList) => {
+        setImages(imageList)
     };
 
 
     //LİMİT POST TEXT
-
-
     let postText = PostMessage.length;
     const limit = textLimit - postText;
-
 
     //Logout 
     function logout() {
@@ -50,14 +50,23 @@ let Home = () => {
         //swal("Başarıyla çıkış yapıldı..", "", "success");
     }
 
-    useEffect(() => {
+    //    firebase.auth().currentUser.uid -> Login olan kullanıcının id sini çağırır    \\
 
+    function SendPost() {
+        firebase.database().ref("users/").child(userId).child("posts/").push({
+            postContent: PostMessage,
+            postDate: moment().format('lll'),
+            postLikes: 0
+        })
+        swal("Tebrikler..", "Haberiniz paşarıyla paylaşıldı..", "success")
+    }
+
+    useEffect(() => {
         //Menu Property
         const { SubMenu } = Menu;
         let toggleCollapsed = () => {
             setcollapsed(collapsed == false)
         }
-
 
     }, [])
 
@@ -125,11 +134,11 @@ let Home = () => {
                                                             <div className="post__gallery__icon mb-3">
                                                                 <PictureTwoTone style={{ fontSize: 24 }} onClick={onImageUpload} {...dragProps} />
                                                             </div>
-                                                            <div className="post__line">
+                                                            <div className={limit < 310 ? "post__line" : "d-none"}>
                                                                 <div className={limit <= 15 ? "post__text__limit" : "post__line__border"}>{limit < 1 ? "0" : limit}</div>
                                                             </div>
                                                             <div className="post__button">
-                                                                <input type="submit" disabled={PostMessage.length > 0 ? `` : `true`} onClick={() => console.log(PostMessage)} className="postButton" name="post" value="Paylaş" />
+                                                                <input type="submit" disabled={PostMessage.length > 0 ? `` : `true`} onClick={() => SendPost()} className="postButton" name="post" value="Paylaş" />
                                                             </div>
                                                             {imageList.map((image, index) => (
                                                                 <div key={index} className="image-item-container">
@@ -139,7 +148,6 @@ let Home = () => {
                                                                     </div>
                                                                 </div>
                                                             ))}
-
                                                         </div>
                                                     </div>
                                                 </div>
