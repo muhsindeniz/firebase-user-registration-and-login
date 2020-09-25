@@ -4,13 +4,15 @@ import { Menu, Button, Input } from 'antd';
 import { HomeOutlined, UserOutlined, LogoutOutlined, PictureTwoTone } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
-import firebase from '../../Firebase/firebase';
 import ImageUploading from 'react-images-uploading';
 import moment from 'moment'
 import 'moment/locale/tr' //For Turkey
+import firebase from '../../Firebase/firebase';
+import Firebase from 'firebase';
 
 import logo from '../../assets/img/logo.svg';
 import profile from '../../assets/img/pp.png';
+import { storage } from 'firebase';
 
 let Home = () => {
 
@@ -23,14 +25,14 @@ let Home = () => {
     let history = useHistory();
 
     const [collapsed, setcollapsed] = useState(false);
-    const [images, setImages] = useState([]);
-    const maxNumber = 2;
+    const [images, setImages] = useState();
+    const maxNumber = 1;
     const [textLimit, settextLimit] = useState(310);
 
     //POST DATA
     const [PostMessage, setPostMessage] = useState([]);
     const onChange = (imageList) => {
-        setImages(imageList)
+        SendPost(imageList[0].file)
     };
 
 
@@ -50,16 +52,28 @@ let Home = () => {
         //swal("Başarıyla çıkış yapıldı..", "", "success");
     }
 
-    //    firebase.auth().currentUser.uid -> Login olan kullanıcının id sini çağırır    \\
+    //firebase.auth().currentUser.uid -> Login olan kullanıcının id sini çağırır    \\
 
-    function SendPost() {
+    function SendPost(postImg) {
+
+        let postImagesurl = 'gs://sociallogin-dddb3.appspot.com/UsersPosts/' + userId + '/' + postImg.name;
+
         firebase.database().ref("users/").child(userId).child("posts/").push({
             postContent: PostMessage,
             postDate: moment().format('lll'),
-            postLikes: 0
+            postLikes: 0,
+            postImagesUrl: postImagesurl
         })
-        swal("Tebrikler..", "Haberiniz paşarıyla paylaşıldı..", "success")
+
+        let storageRef = firebase.storage().ref("UsersPosts/").child(userId).child("/" + postImg.name)
+        let uploadTask = storageRef.put(postImg)
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+            () => {
+                let download = uploadTask.snapshot.downloadURL
+            })
+
     }
+
 
     useEffect(() => {
         //Menu Property
@@ -142,7 +156,7 @@ let Home = () => {
                                                             </div>
                                                             {imageList.map((image, index) => (
                                                                 <div key={index} className="image-item-container">
-                                                                    <img className="image-item" src={image['data_url']} alt="" />
+                                                                    <img className="image-item" id="picturues" src={image['data_url']} alt="" />
                                                                     <div className="image-item__btn-wrapper">
                                                                         <button onClick={() => onImageRemove(index)}>X</button>
                                                                     </div>
